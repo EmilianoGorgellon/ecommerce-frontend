@@ -1,0 +1,62 @@
+.container--register {
+    display: block;
+    width: 100%;
+    padding-top: 20px;
+    .register {
+        text-align: center;
+        max-width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        .register-title {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .container-input {
+            margin: 20px 0;
+            text-align: left;
+            .input-label, .input--error-msj {
+                margin: 10px;
+            }
+            .input {
+                width: 100%;
+                padding: 12px 0 12px 12px;
+                border-radius: 6px;
+                outline: 0;
+                border: 1px solid var(--background);
+                font-size: 16px;
+            }
+            input:focus {
+                border: 2px solid var(--blue);
+            }
+            .input--error-msj {
+                color: red;
+            }
+        }
+        .container--button-submit {
+            width: 100%;
+            .button-submit {
+                width: 102%;
+                font-size: 18px;
+                padding: 10px 0;
+                background-color: var(--blue);
+                outline: 0;
+                border: none;
+                color: var(--paragraph);
+                border-radius: 6px;
+            }
+        }
+    }
+}
+@media screen and (min-width: 768px) {
+    .container--register {
+        width: 50%;
+        padding-top: 50px;
+        margin-right: auto;
+        margin-left: auto;
+        .register {
+            padding: 50px;
+            background-color: var(--backgroundBox);
+            border-radius: 6px;
+        }
+    }
+}

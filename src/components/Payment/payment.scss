@@ -1,0 +1,99 @@
+.container--payment {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    .container--items-payment {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .container--items {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 100%;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--background);
+            background-color: var(--backgroundBox);
+            .payment--items-img {
+                width: 200px;
+                height: 200px;
+                object-fit: contain;
+            }
+            .payment--items-name, .payment--items-price {
+                font-size: 20px;
+                font-weight: 700;
+            }
+            .payment--delete-icon {
+                font-size: 20px;
+                background-color: var(--blue);
+                padding: 5px;
+                border-radius: 3px;
+                color: var(--paragraph);
+                cursor: pointer;
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .container--items {
+                width: 80%;
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+        }
+        .container--payment-total {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+            background-color: var(--backgroundBox);
+            text-align: right;
+            .payment--text, .payment--number {
+                padding: 10px;
+                font-size: 28px;
+                font-weight: 700;
+                margin-right: 10%;
+            }
+            .payment--text {
+                color: var(--blue);
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .container--payment-total {
+                width: 80%;
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+        }
+        .container--payments-buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            width: 100%;
+            background-color: var(--backgroundBox);
+            .payment-button {
+                font-size: 20px;
+                width: 250px;
+                background-color: var(--blue);
+                padding: 5px 10px;
+                border: none;
+                border-radius: 3px;
+                color: var(--paragraph);
+                margin: 20px;
+                transition: transform .4s, background-color .4s;
+            }
+            @media screen and (min-width: 768px) {
+                .payment-button {
+                    cursor: pointer;
+                }
+                .payment-button:hover {
+                    background-color: var(--bluehover);
+                    transform: scale(1.1);
+                }
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .container--payments-buttons {
+                width: 80%;
+                margin-right: 10%;
+                margin-left: 10%;
+            }
+        }
+    }
+}

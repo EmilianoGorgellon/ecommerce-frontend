@@ -1,0 +1,218 @@
+body, * {
+    margin: 0;
+}
+$paragraph: #ffffff;
+$background: #fffffe;
+$headline: #ffffff;
+$bluehover: #0663c7;
+$blue: #0077F9;
+@mixin textStyle {
+    color: $paragraph;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+}
+@mixin animationButton {
+    transform: scale(1.1);
+    background-color: $bluehover;
+}
+@mixin perfilImage($width, $height){
+    width: $width;
+    height: $height;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.container--header {
+    width: 100%;
+    margin-top: -70px;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1000;
+    .header {
+        background-color: $blue;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-bottom: 2px solid $headline;
+        .header--img {
+            height: 70px;
+            object-fit: contain;
+            margin-right: 20px;
+        }
+        @media screen and (min-width: 768px) {
+            .header--img {
+                height: 70px;
+                margin-right: 50px;
+            }
+        }
+        .header--container-search {
+            flex-grow: 2;
+            position: relative;
+            .search-input {
+                font-size: 18px;
+                padding: 5px 10px;
+                width: 100%;
+                border-radius: 3px;
+                outline: 0;
+            }
+            .search-icon {
+                top: 25%;
+                position: absolute;
+                right: 0px;
+                font-size: 20px;
+            }
+        }
+        .header--container-user {
+            display: none;
+        }
+        @media screen and (min-width: 768px) {
+            .header--container-user {
+                display: block;
+                width: 30%;
+                margin-left: 25px;
+                .header--container-buttons-user {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-around;
+                    .header--button-link-user {
+                        @include textStyle();
+                        width: 100%;
+                        text-align: center;
+                        text-decoration: none;
+                        margin: 2px;
+                        padding: 10px;
+                        border-radius: 6px;
+                        transition: background-color .4s, transform .4s;
+                    }
+                    .header--button-link-user:hover {
+                        @include animationButton();
+                    }
+                }
+                .container--user-profile {
+                    display: flex;
+                    margin-left: 5%;
+                    padding: 10px;
+                    cursor: pointer;
+                    transition: transform .4s, background-color .4s;
+                    .profile-img {
+                        @include perfilImage(50px, 50px);
+                    }
+                    .user--profile-text {
+                        margin-left: 15px;
+                        @include textStyle();
+                    }
+                }
+                .container--user-profile-active {
+                    @include animationButton();
+                    border-radius: 6px;
+                }
+            }
+        }
+        .container--icon-bars {
+            display: block;
+            font-size: 26px;
+            width: 15%;
+            text-align: center;
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+        @media screen and (min-width: 768px) {
+            .container--icon-bars {
+                display: none;
+            }
+        }
+    }  
+    @media screen and (min-width: 768px) {
+        .header {
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+    }
+    .show {
+        transform: translateX(0%);
+    }
+    .no-show {
+        transform: translateX(100%);
+    }
+    .container-menu {
+        width: 100%;
+        background-color: $blue;
+        transition: transform .4s;
+        position: fixed;
+        .menu {
+            display: flex;
+            justify-content: space-evenly;
+            list-style: none;
+            flex-direction: column;
+            width: 100%;
+            padding-left: 0;
+            border-bottom: 1px solid $background;
+            @media screen and (min-width: 768px) {
+                .container--buttons-menu-login {
+                    display: none;
+                }
+            }
+            .menu--container-user {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin: 10px auto;
+                border-bottom: 1px solid $background;
+                align-items: center;
+                .menu--user-img {
+                    @include perfilImage(75px, 75px);
+                }
+                .menu--user-text {
+                    @include textStyle();
+                    margin-left: 15px;
+                }
+            }
+            @media screen and (min-width: 768px) {
+                .menu--container-user {
+                    display: none;
+                }
+            }
+            .menu--container-link {
+                width: 100%;
+                text-align: center;
+                .menu-links {
+                    @include textStyle();
+                    padding: 10px 5px;
+                    text-decoration: none;
+                    text-align: center;
+                    border-radius: 6px;
+                    transition: background-color .4s, transform .4s;
+                }
+                @media screen and (min-width: 768px) {
+                    .menu-links:hover {
+                        @include animationButton();
+                    }
+                }
+                .container--link-cart {
+                    position: relative;
+                    width: 100%;
+                }
+            }
+        }
+        @media screen and (min-width: 768px) {
+            .menu {
+                flex-direction: row;
+            }
+        }
+    }  
+    @media screen and (min-width: 768px) {
+        .container-menu {
+            transform: translateX(0);
+            width: 80%;
+            padding-left: 10%;      
+            padding-right: 10%;
+        }
+    }
+}
+@media screen and (min-width: 768px) {
+    .container--header {
+        margin-top: -120px;
+        background-color: $blue;
+    }
+}

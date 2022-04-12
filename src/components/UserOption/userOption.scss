@@ -1,0 +1,22 @@
+.container--user-option {
+    position: absolute;
+    z-index: 1000;
+    right: 0;
+    background-color: var(--bluehover);
+    border-radius: 6px;
+    padding-left: 0;
+    margin-right: 9%;
+    margin-top: -45px;
+    width: 25%;
+    list-style: none;
+    .user--option-link {
+        font-size: 18px;
+        padding: 10px 0;
+        color: var(--paragraph);
+        padding-left: 40px;
+        width: 100%;
+        display: block;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}

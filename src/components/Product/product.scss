@@ -1,0 +1,129 @@
+@mixin productButton($color, $backgroundColor) {
+    width: 35%;
+    font-size: 22px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    color: $color;
+    background-color: $backgroundColor;
+    transition: transform .4s, background-color .4s, color .4s;
+}
+.container--product {
+    display: flex;
+    background-color: var(--backgroundBox);
+    width: 100%;
+    flex-wrap: wrap;
+    @media screen and (min-width: 768px) {
+        .product--images-desktop {
+            width: 50%;
+            display: flex;
+            .container--images-side {
+                display: flex;
+                flex-direction: column;
+                .images-side {
+                    margin-top: 10px;
+                    margin-left: 10px;
+                    width: 60px;
+                    height: 60px;
+                    object-fit: contain;
+                    border: 2px solid var(--background);
+                    border-radius: 6px;
+                }
+                .images-side-active {
+                    border: 1.5px solid var(--blue);
+                    border-radius: 6px;
+                }
+            }
+            .container--product-image {
+                width: 80%;
+                .product-image {
+                    width: 100%;
+                    height: 450px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+    .container--image {
+        background-color: var(--backgroundBox);
+        .image {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+        }
+    }
+    .container--product-information {
+        width: 100%;
+        margin-top: 20px;
+        background-color: var(--background);
+        padding: 20px;
+        .product--informacion-name {
+            text-transform: uppercase;
+        }
+        .product--informacion-price {
+            margin: 10px 0;
+            font-size: 28px;
+            color: var(--blue);
+            font-weight: 600;
+        }
+        .product-container--buttons {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            .product-button {
+                @include productButton(var(--ligth-blue), var(--backgroundBox));
+                border: 2px solid var(--blue);
+                cursor: pointer;
+            }
+            .link-payment {
+                @include productButton(var(--backgroundBox), var(--ligth-blue));
+                text-align: center;
+                text-decoration: none;
+            }
+            @media screen and (min-width: 768px) {
+                .product-button:hover, .link-payment:hover {
+                    transform: scale(1.1);
+                    background-color: var(--bluehover);
+                }
+                .product-button:hover {
+                    color: var(--paragraph);
+                }
+            }
+        }
+        .product--informacion-stock {
+            font-size: 22px;
+            margin: 10px 0;
+            padding: 8px 5px;
+            display: inline-block;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .stock {
+            background-color: var(--green);
+        }
+        .no-stock {
+            background-color: var(--red);
+        }
+        .product--informacion-description {
+            font-size: 18px;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .container--product-information {
+            width: 50%;
+            padding-left: 0;
+            padding-right: 0;
+            background-color: var(--backgroundBox);
+            border-bottom-right-radius: 6px;
+        }
+    }
+}
+@media screen and (min-width: 768px) {
+    .container--product {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: var(--backgroundBox);
+        border-radius: 6px;
+    }
+}
+

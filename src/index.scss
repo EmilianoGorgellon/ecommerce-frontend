@@ -1,0 +1,30 @@
+@import url("./components/Header/header.scss");
+@import url("./components/Carrousel/carrousel.scss");
+@import url("./components/Products/productsPage.scss");
+@import url("./components/Payment/payment.scss");
+@import url("./components/Product/product.scss");
+@import url("./components/Destacados/destacados.scss");
+@import url("./components/Login/login.scss");
+@import url("./components/UserOption/userOption.scss");
+@import url("./components/Register/register.scss");
+:root {
+    --blue: #0077F9;
+    --bluehover: #0663c7;
+    --ligth-blue: #4169E1;
+    --paragraph: #ffffff;
+    --background: #EDEDED;
+    --backgroundBox: #ffffff;
+    --red: #ff3333;
+    --green: #00A650;
+}
+body {
+    margin: 70px 0 0 0;
+    background-color: var(--background);
+    font-family: 'Roboto', sans-serif;
+}
+@media screen and (min-width: 768px) {
+    body {
+        margin-top: 120px;
+    }
+}
+
