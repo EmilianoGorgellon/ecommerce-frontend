@@ -69,18 +69,14 @@ const Destacados = () => {
                         modules={[Pagination, Navigation]}
                     >
                         {dataProducts.map((dato,i) => 
-                    
-                                <Link to={`/product/${dato.name}`} className="container--item" key={dato.id} >
-                                    <SwiperSlide className='item'>
-                                    <div >
-                                        <img className='item--image' src={`${dato.image}`} alt={`${dato.name}- ${dato.id}`} />
-                                        <h3 className='item--name'>{`${dato.name}`}</h3>
-                                        <p className='item--price'>{`$ ${dato.price},00`}</p>
-                                        <button className='item--button' onClick={() => addProductToShoppingCart(dato.id, dato.image, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
-                                    </div>
-                                    </SwiperSlide>
+                            <SwiperSlide className='container--item'>
+                                <Link to={`/product/${dato.name}`} className="item--link" key={dato.id} >
+                                    <img className='item--image' src={`${dato.image}`} alt={`${dato.name}- ${dato.id}`} />
+                                    <h3 className='item--name'>{`${dato.name}`}</h3>
+                                    <p className='item--price'>{`$ ${dato.price},00`}</p>
+                                    <button className='item--button' onClick={() => addProductToShoppingCart(dato.id, dato.image, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
                                 </Link>
-                         
+                            </SwiperSlide>
                         )}
                     </Swiper>
                 
