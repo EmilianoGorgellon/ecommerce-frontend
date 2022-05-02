@@ -49,11 +49,11 @@ const Header = (params) => {
                             :
                             <div className={userOption ? 'container--user-profile container--user-profile-active'  : 'container--user-profile'} onMouseEnter={() => dispatch(showMenu(true))}>
                                 <div className="user--profile-img">
-                                    <img className='profile-img' src={`${decodedToken.image}`} alt={`${decodedToken.name}-img`} />
+                                    <img className='profile-img' src={`${decodedToken.name.image}`} alt={`${decodedToken.name.name}-img`} />
                                 </div>
                                 <p className='user--profile-text'>
-                                    {decodedToken.email} <br />
-                                    {decodedToken.name} <br />
+                                    {decodedToken.name.email} <br />
+                                    {decodedToken.name.name} <br />
                                 </p>
                             </div>
                         }
@@ -72,12 +72,12 @@ const Header = (params) => {
                             :
                             <div className="menu--container-user">
                                 <div className='menu--container-user-img'>
-                                    <img className='menu--user-img' src={`${decodedToken.image}`} alt={`${decodedToken.name}-img`} />
+                                    <img className='menu--user-img' src={`${decodedToken.name.image}`} alt={`${decodedToken.name.name}-img`} />
                                 </div>
                                 <div>
                                     <p className='menu--user-text'>
-                                        {decodedToken.email} <br />
-                                        {decodedToken.name} <br />
+                                        {decodedToken.name.email} <br />
+                                        {decodedToken.name.name} <br />
                                     </p>
                                     <p onClick={() => (dispatch(deleteTokenFromCookie()), window.location.reload())} className='menu--user-text'>Cerrar sesion</p>
                                 </div>

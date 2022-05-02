@@ -76,6 +76,7 @@
             }
             .link-payment {
                 @include productButton(var(--backgroundBox), var(--ligth-blue));
+                border: none;
                 text-align: center;
                 text-decoration: none;
             }

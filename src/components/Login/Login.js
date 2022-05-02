@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { authUser } from "../../services/usersService";
+import { loginUser } from "../../services/usersService";
 import { useDispatch } from 'react-redux';
 import { getTokenFromCookie } from "../../features/slices/token"
 const Login = (params) => {
@@ -36,7 +36,7 @@ const Login = (params) => {
                                 email: values.email,
                                 password: values.password,
                             }
-                            const response = await authUser(DATA);
+                            const response = await loginUser(DATA);
                             if (typeof (response) === "string") {
                                 params.history.push("/");
                                 dispatch(getTokenFromCookie());

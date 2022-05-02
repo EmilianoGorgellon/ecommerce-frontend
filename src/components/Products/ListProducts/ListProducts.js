@@ -10,10 +10,6 @@ const ListProducts = (params) => {
         dispatch(addProduct({id, image, name, price}))
     }
     const data = useSelector(state => state.filterProducts);
-    // const sendUrl = (e) => {
-        // e.preventDefault();
-        // window.location.pathname = "/payment";
-    // }
     
     return (
         <div className='container--products-page'>
@@ -28,8 +24,8 @@ const ListProducts = (params) => {
                             <p className='product-text-price'>${dato.price}, 00</p>
                             <p className={dato.stock > 0 ? "stock" : "no-stock"}>{dato.stock !== 0 ? `En stock` : `Sin stock`}</p>
                             <div className='container--buttons-product'>
-                                {/* <button className='button-payment'><Link to="/payment" className='link-payment' onClick={(e) => sendUrl(e)}>Comprar</Link></button> */}
-                                <Link to="/payment" className='link-payment' onClick={(e) =>  dispatch(addProduct(dato.id, dato.image, dato.name, dato.price))}>Comprar</Link>
+                                <button className='link-payment' onClick={(e) => addProductToCart(dato.id, dato.image, dato.name, dato.price, e)}><Link to="/payment" className='link-payment'>Comprar</Link></button>
+                                {/* <Link to="/payment" className='link-payment' onClick={(e) => send_product(dato.id, dato.image, dato.name, dato.price, e)}>Comprar</Link> */}
                                 <button className='button-cart' onClick={(e) => addProductToCart(dato.id, dato.image, dato.name, dato.price, e)}>Agregar <AiOutlineShoppingCart /></button>
                             </div>
                         </div>

@@ -14,23 +14,7 @@ const Backoffice = () => {
     }, [])
 
     return (
-        // token !== "" ? 
-        //     <>
-        //         {console.log(decodedToken)}
-        //         {console.log(render)}
-
-        //         <h1>Estas en back office </h1>
-        //     </>
-        // : 
-        //     // <h1>Hola</h1>
-        //     <Redirect to="/" />
-        render ?
-            decodedToken.isAdmin?
-                <h1>Hola {decodedToken.name}, que desea hacer?</h1>
-                :
-                <Redirect to="/" />
-            :
-            null
+        <h1>Esto es back office</h1>
     )
 }
 

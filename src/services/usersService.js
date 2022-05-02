@@ -24,9 +24,9 @@ export const saveUser = async (user) => {
     }
 }
 
-export const authUser = async (data) => {
+export const loginUser = async (data) => {
     try {
-        const response = await axios.post("http://localhost:4000/api/auth/signin", data);      
+        const response = await axios.post("http://localhost:4000/api/auth/login", data);      
         cookies.set('token', response.data, { path: '/' });
         return response.data;
     } catch (error) {

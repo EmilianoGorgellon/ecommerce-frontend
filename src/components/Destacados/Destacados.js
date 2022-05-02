@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { getAllProducts } from '../../services/productServices';
 import { Link } from 'react-router-dom';
 import {MdOutlineAddShoppingCart} from "react-icons/md";
-import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from "react-icons/bs";
 import { useDispatch } from 'react-redux';
 import  { addProduct } from "../../features/slices/cart/index";
 // import swiper
@@ -46,13 +45,6 @@ const Destacados = () => {
         dispatch(addProduct({id, image, name, price}))
     }   
 
-    // let styleContainerItem = {
-    //     display: 'grid',
-    //     position: 'relative',
-    //     gridTemplateRows: 'repeat(1, 1fr)',
-    //     gridTemplateColumns: `repeat(${dataProducts.length}, 1fr)`,
-    //     width: `${Math.ceil(dataProducts.length / 4 )*100}%`
-    // }
     return (
         <div className='container--destacados'> 
             <h1 className='title--destacados'> Productos destacados</h1> 
@@ -69,8 +61,8 @@ const Destacados = () => {
                         modules={[Pagination, Navigation]}
                     >
                         {dataProducts.map((dato,i) => 
-                            <SwiperSlide className='container--item'>
-                                <Link to={`/product/${dato.name}`} className="item--link" key={dato.id} >
+                            <SwiperSlide className='container--item'  key={dato.id} >
+                                <Link to={`/product/${dato.name}`} className="item--link">
                                     <img className='item--image' src={`${dato.image}`} alt={`${dato.name}- ${dato.id}`} />
                                     <h3 className='item--name'>{`${dato.name}`}</h3>
                                     <p className='item--price'>{`$ ${dato.price},00`}</p>
@@ -79,29 +71,6 @@ const Destacados = () => {
                             </SwiperSlide>
                         )}
                     </Swiper>
-                
-                {/* <BsFillArrowLeftCircleFill className='left-arrow' onClick={moveToLeft}/>
-                <BsFillArrowRightCircleFill className='right-arrow' onClick={moveToRight}/>
-            <div className='destacados-container--items' style={styleContainerItem}>
-                {dataProducts.map((dato, i) => 
-                    <section className='container--item' key={dato.id} style={{ transform:  `translateX(${moveElements}%)`}}>
-                        <div className='item'>
-                            <img className='item--image' src={`${dato.image}`} alt={`${dato.name}- ${dato.id}`} />
-                            <h3 className='item--name'>{`${dato.name}`}</h3>
-                            <p className='item--price'>{`$ ${dato.price},00`}</p>
-                            <button className='item--button' onClick={() => addProductToShoppingCart(dato.id, dato.image, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
-                        </div>
-                        <Link to={`/product/${dato.name}`} className="container--item-link" >
-                            <div className='item'>
-                                <img className='item--image' src={`${dato.image}`} alt={`${dato.name}- ${dato.id}`} />
-                                <h3 className='item--name'>{`${dato.name}`}</h3>
-                                <p className='item--price'>{`$ ${dato.price},00`}</p>
-                                <button className='item--button' onClick={() => addProductToShoppingCart(dato.id, dato.image, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
-                            </div>
-                        </Link>
-                    </section>
-                )}
-            </div> */}
         </div>
     )
 }
