@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useJwt } from 'react-jwt';
-import { Redirect } from 'react-router-dom';
-import { getTokenFromCookie } from '../../features/slices/token';
+import PageNotFound from '../PageNotFound/PageNotFound';
+import Cookies from 'universal-cookie';
 const Backoffice = () => {
-    const dispatch = useDispatch();
-    dispatch(getTokenFromCookie());
-    const [render, setRender] = useState(false)
-    const token = useSelector(state => state.getToken);
-    const { decodedToken } = useJwt(token);
+    const cookie = new Cookies();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const get_token = cookie.get("token");
+    const { decodedToken } = useJwt(get_token);
     useEffect(() => {
-        setTimeout(() => setRender(true), 300)
-    }, [])
+      if (decodedToken !== null) return setIsAdmin(decodedToken.name.isAdmin)
+    }, [decodedToken])
 
     return (
-        <h1>Esto es back office</h1>
+        <>
+           { isAdmin ? 
+            <h1>Muestro algo, ca podes agregar producto y dar de alta a administrador</h1>
+                : 
+            <PageNotFound />}
+        </>
     )
 }
 

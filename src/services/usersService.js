@@ -12,7 +12,7 @@ const cookies = new Cookies();
 // console.log(token)
 export const saveUser = async (user) => {
     try {
-        const response = await axios.post("http://localhost:4000/api/auth/signup", user);
+        const response = await axios.post("http://localhost:4000/api/auth/register", user);
         // console.log(response)
     } catch (error) {
         Swal.fire({
