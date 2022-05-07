@@ -11,10 +11,12 @@ import { getTokenFromCookie, deleteTokenFromCookie } from '../../features/slices
 import { showMenu } from '../../features/slices/showUserOption';
 import { useDispatch, useSelector } from 'react-redux';
 import UserOption from "../UserOption/UserOption"
+import Swal from 'sweetalert2';
 const Header = (params) => {
     const [barMenu, setBarMenu] = useState(false);
     const [cart, setCart] = useState(false);
     const [renderPage, setRenderPage] = useState(false);
+    const [errorSwal, setErrorSwal] = useState(false);
     const searchRef = useRef();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -47,15 +49,17 @@ const Header = (params) => {
                                 <Link to="/register" className='header--button-link-user'>Registrarse</Link>
                             </div>
                             :
-                            <div className={userOption ? 'container--user-profile container--user-profile-active'  : 'container--user-profile'} onMouseEnter={() => dispatch(showMenu(true))}>
-                                <div className="user--profile-img">
-                                    <img className='profile-img' src={`${decodedToken.name.image}`} alt={`${decodedToken.name.name}-img`} />
+                            decodedToken.name.validateEmail ? 
+                                <div className={userOption ? 'container--user-profile container--user-profile-active'  : 'container--user-profile'} onMouseEnter={() => dispatch(showMenu(true))}>
+                                    <div className="user--profile-img">
+                                        <img className='profile-img' src={`${decodedToken.name.image}`} alt={`${decodedToken.name.name}-img`} />
+                                    </div>
+                                    <p className='user--profile-text'>
+                                        {decodedToken.name.email} <br />
+                                        {decodedToken.name.name} <br />
+                                    </p>
                                 </div>
-                                <p className='user--profile-text'>
-                                    {decodedToken.name.email} <br />
-                                    {decodedToken.name.name} <br />
-                                </p>
-                            </div>
+                            : setErrorSwal(true)
                         }
                     </div>
                     <div className='container--icon-bars' onClick={() => barMenu ? setBarMenu(false) : setBarMenu(true)}>
@@ -99,6 +103,16 @@ const Header = (params) => {
                     </ul>
                 </nav>
             </header>
+            {errorSwal ? 
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Debe confirmar su cuenta en su correo electronico para seguir',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+                    .then(() => dispatch(deleteTokenFromCookie()))
+                    .then(() => window.location.reload()) : null
+            }
             {cart ? <Cart /> : null}
             {userOption ? <UserOption /> : null}
             {renderPage ? <Redirect to={`/search/${searchRef.current.value}`} search={searchRef.current.value} /> : null}

@@ -1,13 +1,14 @@
 import {useState, useEffect} from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { saveUser } from '../../services/usersService';
+import SweetAlert from '../SweetAlert/SweetAlert';
 const Register = () => {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [fileImageMsj, setFileImageMsj] = useState(false);
     const VALIDATION = {
         name: /^[a-zA-Z\s]{3,}$/,
-        email: /^[0-9a-zA-Z\._-]+@[0-9a-zA-Z\._-]+\.[a-z\.]{2,6}$/,
-        password: /^[0-9a-zA-Z\s._-]{3,}$/
+        email: /^([0-9a-z_\.\+-]+)@(gmail.com)$/,
+        password: /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,16}/
     }
     useEffect(() => {
         setTimeout(() => setFileImageMsj(false), 1500)
@@ -38,27 +39,32 @@ const Register = () => {
                     if (!values.email) {
                         errors.email = "Debe ingresar su email"
                     } else if (!VALIDATION.email.test(values.email)) {
-                        errors.email = "Formato inválido. Ejemplo de formato válido: correo@correo.com"
+                        errors.email = "Solo se acepta gmail. Ejemplo correo@gmail.com"
                     }
                     if (!values.password) {
                         errors.password = 'Ingrese una contraseña'
                     } else if (!VALIDATION.password.test(values.password)) {
-                        errors.password = "Este campo debe contener una letra minuscula, una mayuscula, un numero y un digito especial"
+                        errors.password = "Este campo debe contener 8 a 16 caracteres y una letra minuscula, una mayuscula, un numero y un digito especial"
                     }
                     return errors;
                 }}
                 onSubmit={async (values) => {
-                    if (values.repeatPassword !== values.password) return setRepeatPassword("Contraseñas no coinciden");
-                    const typeImage = values.image.type.split("/");
-                    if (typeImage[typeImage.length-1] === "jpeg" || "png" || "jpg") {
-                        const formData = new FormData();
-                        formData.append('name', values.name)
-                        formData.append('email', values.email);
-                        formData.append('password', values.password);
-                        formData.append('image', values.image);
-                        return await saveUser(formData);
+                    try {
+                        if (values.repeatPassword !== values.password) return setRepeatPassword("Contraseñas no coinciden");
+                        const typeImage = values.image.type.split("/");
+                        const format_image = typeImage[typeImage.length-1];
+                        if (format_image === "jpeg" || format_image === "png" || format_image === "jpg") {
+                            const formData = new FormData();
+                            formData.append('name', values.name)
+                            formData.append('email', values.email);
+                            formData.append('password', values.password);
+                            formData.append('image', values.image);
+                            return await saveUser(formData);
+                        }
+                        return setFileImageMsj(true);   
+                    } catch (error) {
+                        SweetAlert("Error!", "Es obligatorio completar todos los campos", "error", "Ok")
                     }
-                    return setFileImageMsj(true);
                 }}
             >
                 {({ errors, setFieldValue }) => (

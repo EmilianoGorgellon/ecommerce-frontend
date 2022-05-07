@@ -1,12 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { loginUser } from "../../services/usersService";
 import { useDispatch } from 'react-redux';
-import { getTokenFromCookie } from "../../features/slices/token"
+import { getTokenFromCookie } from "../../features/slices/token";
 const Login = (params) => {
     const dispatch = useDispatch();
     const VALIDATION = {
         email: /^[0-9a-zA-Z\._-]+@[0-9a-zA-Z\._-]+\.[a-z\.]{2,6}$/,
-        password: /^[0-9a-zA-Z\s]{3,}$/,
+        password: /^[0-9a-zA-Z\s._-]{3,}$/
     }
 
     return (
@@ -20,14 +20,14 @@ const Login = (params) => {
                         validate={(values) => {
                             let errors = {};
                             if (!values.email) {
-                                errors.email = "Debe ingresar su nombre"
+                                errors.email = "Ingrese una dirección de correo electronico"
                             } else if (!VALIDATION.email.test(values.email)) {
                                 errors.email = "Formato inválido. Ejemplo de formato válido: correo@correo.com"
                             }
                             if (!values.password) {
-                                errors.password = 'Ingrese una dirección de correo'
+                                errors.password = 'Ingrese una contraseña'
                             } else if (!VALIDATION.password.test(values.password)) {
-                                errors.password = "Este campo debe contener solo letras, y un mínimo de 3 caracteres."
+                                errors.password = "Este campo debe contener una letra minuscula, una mayuscula, un numero y un digito especial"
                             }
                             return errors;
                         }}

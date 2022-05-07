@@ -1,5 +1,5 @@
 import axios from "axios";
-import Swal from 'sweetalert2';
+import SweetAlert from "../components/SweetAlert/SweetAlert";
 import Cookies from 'universal-cookie';
 // const response = await axios.post("http://localhost:4000/api/auth/signup", user, {
 //     headers: {
@@ -7,20 +7,13 @@ import Cookies from 'universal-cookie';
 //     }
 // });
 const cookies = new Cookies();
-// const token = cookies.get("token");
-// console.log("leo token")
-// console.log(token)
+
 export const saveUser = async (user) => {
     try {
         const response = await axios.post("http://localhost:4000/api/auth/register", user);
-        // console.log(response)
+        return SweetAlert("Bien!", "Su usuario ya fue creado, confirme su email en su casilla de correo e intente iniciar sesion", "success", "Ok")
     } catch (error) {
-        Swal.fire({
-            title: 'Error!',
-            text: 'Ya existe una cuenta con ese email',
-            icon: 'error',
-            confirmButtonText: 'Exit'
-          })
+        return SweetAlert("Error!", "Ya existe una cuenta con ese gmail", "error", "Exit")
     }
 }
 
@@ -30,11 +23,6 @@ export const loginUser = async (data) => {
         cookies.set('token', response.data, { path: '/' });
         return response.data;
     } catch (error) {
-        return Swal.fire({
-            title: 'Error!',
-            text: 'Email y/o contraseña inexistentes',
-            icon: 'error',
-            confirmButtonText: 'Ok'
-          })
+        return SweetAlert("Error!", "Email y/o contraseña inexistentes", "error", "Exit")
     }
 }
