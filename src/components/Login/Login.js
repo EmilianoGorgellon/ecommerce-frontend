@@ -5,8 +5,8 @@ import { getTokenFromCookie } from "../../features/slices/token";
 const Login = (params) => {
     const dispatch = useDispatch();
     const VALIDATION = {
-        email: /^[0-9a-zA-Z\._-]+@[0-9a-zA-Z\._-]+\.[a-z\.]{2,6}$/,
-        password: /^[0-9a-zA-Z\s._-]{3,}$/
+        email: /^([0-9a-z_\.\+-]+)@(gmail.com)$/,
+        password: /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,16}/
     }
 
     return (
