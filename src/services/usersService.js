@@ -26,3 +26,18 @@ export const loginUser = async (data) => {
         return SweetAlert("Error!", "Email y/o contraseña inexistentes", "error", "Exit")
     }
 }
+
+export const updateUser = async (data, token) => {
+    try {
+        const response = await axios.put("http://localhost:4000/api/user", data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error)
+        return SweetAlert("Error!", "No se pudo actualizar el usuario", "error", "Exit")
+    }
+}

@@ -1,38 +1,121 @@
-.container--settings-data {
+.container--settings {
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
     align-items: center;
     justify-content: center;
-    width: 60%;
+    width: 100%;
+    .container--settings-form {
+        width: 100%;
+        margin-top: 80px;
+        text-align: center;
+        background-color: var(--backgroundBox);
+        border-radius: 8px;
+        .settings--title {
+            margin: 20px;
+        }
+        .settings--container-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .container--img {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                cursor: pointer;
+                .settings--form-img {
+                    width: 250px;
+                    height: 250px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    z-index: 100;
+                }
+                .settings--img-hover {
+                    opacity: .5;
+                }
+                .container--change-image {
+                    position: absolute;
+                    font-size: 24px;
+                }
+            }
+            .no--show {
+                display: none;
+            }
+            .settings--input-label {
+                margin-top: 20px;
+                font-size: 18px;
+            }
+            .settings--input {
+                width: 90%;
+                padding: 12px 0 12px 12px;
+                border-radius: 6px;
+                outline: 0;
+                border: 1px solid var(--background);
+                font-size: 18px;
+            }
+            @media screen and (min-width: 768px) {
+                .settings--input {
+                    width: 60%;
+                }
+            }
+            .container--settings-input-edit {
+                width: 100%;
+                position: relative;
+                .settings--input-edit {
+                    width: 90%;
+                    padding: 12px 0 12px 12px;
+                    border-radius: 6px;
+                    outline: 0;
+                    border: 1px solid var(--background);
+                    font-size: 18px;
+                }
+                @media screen and (min-width: 768px) {
+                    .settings--input-edit {
+                        width: 60%;
+                    }
+                }
+                .settings--icon-edit {
+                    position: absolute;
+                    right: 8%;
+                    top: 25%;
+                    font-size: 25px;
+                }
+                @media screen and (min-width: 768px) {
+                    .settings--icon-edit {
+                        right: 21%;
+                    }
+                }
+            }
+            .input--error-msj {
+                font-size: 18px;
+                width: 80%;
+                color: var(--red);
+            }
+            .settings--button {
+                margin: 20px 0;
+                width: 61%;
+                font-size: 18px;
+                padding: 10px 0;
+                background-color: var(--blue);
+                outline: 0;
+                border: none;
+                color: var(--paragraph);
+                border-radius: 6px;
+                transition: transform .4s;
+            }
+            .settings--button:hover {
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+        }
+    }
 }
-// .container--settings-data {
-//     display: flex;
-//     margin-left: auto;
-//     margin-right: auto;
-//     width: 60%;
-//     .settings-data {
-//         width: 100%;
-//         margin-top: 20%;
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: center;
-//         align-items: center;
-//         background-color: var(--blue);
-//         border-radius: 8px;
-//         .setting-img {
-//             margin-top: 10%;
-//             width: 350px;
-//             height: 350px;
-//             object-fit: cover;
-//             border-radius: 50%;
-//             cursor: pointer;
-//         }
-//     }
-   
-// }
 
-// .formik-inputs {
-//     margin-top: 20%;
-// }
+@media screen and (min-width: 768px) {
+    .container--settings {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+    }
+}
