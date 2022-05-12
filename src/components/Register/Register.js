@@ -2,9 +2,12 @@ import {useState, useEffect} from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { saveUser } from '../../services/usersService';
 import SweetAlert from '../SweetAlert/SweetAlert';
+import { BiCamera } from 'react-icons/bi';
 const Register = () => {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [fileImageMsj, setFileImageMsj] = useState(false);
+    const [mouseInImage, setMouseInImage] = useState(false);
+    const [newImage, setNewImage] = useState("https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_960_720.png")
     const VALIDATION = {
         name: /^[a-zA-Z\s]{3,}$/,
         email: /^([0-9a-z_\.\+-]+)@(gmail.com)$/,
@@ -17,7 +20,11 @@ const Register = () => {
     useEffect(() => {
         setTimeout(() => setRepeatPassword(""), 1500)
     }, [repeatPassword])
-    
+
+    const changeImage = (e) => {
+        const url = URL.createObjectURL(e.target.files[0]);
+        setNewImage(url);
+    }
     return (
         <main className='container--register'>
             <div className='register'>
@@ -69,6 +76,17 @@ const Register = () => {
                 >
                     {({ errors, setFieldValue }) => (
                         <Form className='container--inputs'>
+                            <label htmlFor="file-input" className="container--img" onMouseEnter={() => setMouseInImage(true)} onMouseLeave={() => setMouseInImage(false)}>
+                                <img className={mouseInImage ? "settings--form-img settings--img-hover" : "settings--form-img"} src={newImage} alt="foto-perfil"/>
+                                {mouseInImage ? 
+                                    <div className="container--change-image">
+                                        <BiCamera />
+                                        <p>Cambie foto de perfil</p>
+                                    </div> : null
+                                }
+                            </label>
+                            <input className="no--show" id='file-input' type="file" accept='.jpg,.png,.jpeg' name='image' onChange={(e) => (setFieldValue("image", e.target.files[0]), changeImage(e))} />
+                            <p className='input--error-msj'>{fileImageMsj ? "El formato del archivo debe ser JPG, JPEG o PNG" : null}</p>
                             <div className='container-input'>
                                 <Field name="name" className="input" type="Text" placeholder="Ingrese su nombre" />
                                 <ErrorMessage name="name" component={() => <p className='input--error-msj'>{errors.name}</p>}/>
@@ -84,10 +102,6 @@ const Register = () => {
                             <div className='container-input'>
                                 <Field name="repeatPassword" className="input" type="password" placeholder="Repita contraseña" />
                                 <p className='input--error-msj'>{repeatPassword}</p>
-                            </div>
-                            <div className='container-input'>
-                                <input type="file" accept='.jpg,.png,.jpeg' className='input' name='image' onChange={(e) => setFieldValue("image", e.target.files[0])} />
-                                <p className='input--error-msj'>{fileImageMsj ? "El formato del archivo debe ser JPG, JPEG o PNG" : null}</p>
                             </div>
                             <div className='container--button-submit'>
                                 <button className='button-submit' type="submit">Enviar</button>

@@ -1,17 +1,12 @@
 import axios from "axios";
 import SweetAlert from "../components/SweetAlert/SweetAlert";
 import Cookies from 'universal-cookie';
-// const response = await axios.post("http://localhost:4000/api/auth/signup", user, {
-//     headers: {
-//         authorization: `Bearer token`
-//     }
-// });
 const cookies = new Cookies();
 
 export const saveUser = async (user) => {
     try {
-        const response = await axios.post("http://localhost:4000/api/auth/register", user);
-        return SweetAlert("Bien!", "Su usuario ya fue creado, confirme su email en su casilla de correo e intente iniciar sesion", "success", "Ok")
+        await axios.post("http://localhost:4000/api/auth/register", user);
+        return SweetAlert("Bien!", "Su usuario ya fue creado, confirme su email en su casilla de correo e intente iniciar sesion", "success", "Ok");
     } catch (error) {
         return SweetAlert("Error!", "Ya existe una cuenta con ese gmail", "error", "Exit")
     }
@@ -29,13 +24,12 @@ export const loginUser = async (data) => {
 
 export const updateUser = async (data, token) => {
     try {
-        const response = await axios.put("http://localhost:4000/api/user", data, {
+        await axios.put("http://localhost:4000/api/user", data, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(response);
-        return response;
+        return SweetAlert("Bien!", "Se actualizo su perfil vuelva a refrescar la pagina para ver los cambios", "success", "Ok");
     } catch (error) {
         console.log(error)
         return SweetAlert("Error!", "No se pudo actualizar el usuario", "error", "Exit")

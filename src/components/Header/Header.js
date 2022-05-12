@@ -114,7 +114,7 @@ const Header = (params) => {
                     .then(() => window.location.reload()) : null
             }
             {cart ? <Cart /> : null}
-            {userOption ? <UserOption /> : null}
+            {userOption ? <UserOption isAdmin={decodedToken.name.isAdmin} /> : null}
             {renderPage ? <Redirect to={`/search/${searchRef.current.value}`} search={searchRef.current.value} /> : null}
         </>
     )

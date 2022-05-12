@@ -8,10 +8,10 @@ import Categories from './components/Categories/Categories';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Settings from './components/Settings/Settings';
-import Backoffice from './components/Backoffice/Backoffice';
+import ProductBack from './components/Backoffice/ProductBack';
+import AdministradorBack from './components/Backoffice/AdministradorBack';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 const AppRoutes = () => {
-
   return (
     <Router>
       <Header /> 
@@ -24,7 +24,8 @@ const AppRoutes = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/settings" component={Settings} />
-        <Route exact path="/backoffice" component={Backoffice} />
+        <Route exact path="/backoffice/product" component={ProductBack} />
+        <Route exact path="/backoffice/admin" component={AdministradorBack} />
         <Route path='*' component={PageNotFound} />
         {/* <Route path="/sendProduct" element={<FormProduct />} /> */}
       </Switch>
