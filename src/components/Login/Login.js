@@ -22,7 +22,7 @@ const Login = (params) => {
                             if (!values.email) {
                                 errors.email = "Ingrese una dirección de correo electronico"
                             } else if (!VALIDATION.email.test(values.email)) {
-                                errors.email = "Formato inválido. Ejemplo de formato válido: correo@correo.com"
+                                errors.email = "Formato inválido. Ejemplo de formato válido: correo@gmail.com"
                             }
                             if (!values.password) {
                                 errors.password = 'Ingrese una contraseña'
