@@ -1,0 +1,70 @@
+.container--admin-back {
+    display: block;
+    padding-top: 30px;
+    .admin--back {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--backgroundBox);
+        .admin--back-title {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .container--admin-back-form {
+            width: 90%;
+            .admin--back-input {
+                display: block;
+                margin: 0 auto;
+                width: 90%;
+                padding: 8px;
+                box-sizing: border-box;
+                border-radius: 6px;
+                outline: 0;
+                border: 1px solid var(--background);
+                font-size: 18px;
+            }
+            .input--error-msj {
+                margin: 10px auto 0 auto;
+                width: 90%;
+                color: var(--red);
+            }
+            .admin--back-button {
+                display: block;
+                margin: 20px auto;
+                width: 90%;
+                font-size: 22px;
+                padding: 8px;
+                background-color: var(--blue);
+                color: var(--paragraph);
+                outline: 0;
+                border: none;
+                border-radius: 6px;
+            }
+            @media screen and (min-width: 768px) {
+                .admin--back-button {
+                    transition: transform .4s;
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.05);
+                    }
+                }
+            }
+        }
+    
+        @media screen and (min-width: 768px) {
+            .container--admin-back-form {
+                width: 100%;
+            }
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .admin--back {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+            border-radius: 8px;
+        }
+    }
+}

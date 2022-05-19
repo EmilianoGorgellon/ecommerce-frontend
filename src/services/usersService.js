@@ -43,8 +43,6 @@ export const userToAdmin = async (email, token) => {
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log("veo respuesta")
-        console.log(response);
         return SweetAlert("Bien!", `Se actualizo el perfil de: ${email.email}`, "success", "Ok");
     } catch (error) {
         return SweetAlert("Error!", "No se pudo actualizar el usuario", "error", "Ok");
