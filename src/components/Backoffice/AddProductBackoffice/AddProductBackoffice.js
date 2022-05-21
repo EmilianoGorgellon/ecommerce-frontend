@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { BiImageAdd } from "react-icons/bi"
+import { BiImageAdd } from "react-icons/bi";
+import { useSelector } from 'react-redux';
+import { saveProduct } from "../../../services/productServices"; 
+import SweetAlert from '../../SweetAlert/SweetAlert';
 const AddProductBackoffice = () => {
+    const token = useSelector(state => state.getToken);
     const [firstNewImage, setFirstNewImage] = useState(false);
     const [secondNewImage, setSecondNewImage] = useState(false);
     const [thirdNewImage, setThirdNewImage] = useState(false);
@@ -18,6 +22,14 @@ const AddProductBackoffice = () => {
         if (numberImage === 1) return setFirstNewImage(url);
         if (numberImage === 2) return setSecondNewImage(url);
         if (numberImage === 3) return setThirdNewImage(url);
+    }
+
+    const filterImageByType = (data) => {
+        return data.map(dato => {
+            const typeImage = dato.type.split("/");
+            const format_image = typeImage[typeImage.length-1];
+            if (!(format_image === "png" || format_image === "jpg" || format_image === "jpeg")) throw new Error("Error en formato de imagen");
+        })
     }
   return (
     <main className='container--add-product'>
@@ -44,8 +56,22 @@ const AddProductBackoffice = () => {
                 }}
                 
                 onSubmit = {async (values) => {
-                    console.log(values)
-                    console.log("LO MANDO")
+                    try {
+                        filterImageByType(values.image);
+                        const form_data = new FormData();
+                        form_data.append('image', values.image);
+                        form_data.append('name', values.name);
+                        form_data.append('description', values.description);
+                        form_data.append('price', values.price);
+                        form_data.append('category', values.category);
+                        form_data.append('stock', values.stock);
+                        console.log("LO TENGO QUE MANDAR")
+                        const response = await saveProduct(form_data, token);
+                        console.log(response);
+                    } catch (error) {
+                        SweetAlert("Error!", "El formato de la imagen debe ser png, jpg o jpeg", "error", "Ok!");
+                        return window.location.reload()
+                    }
                 }}
             >
                 {({ errors, values }) => (
@@ -59,7 +85,7 @@ const AddProductBackoffice = () => {
                                     <BiImageAdd className='add--image-icon' />
                                 }
                             </label>
-                            <input className='no--show' type="file" name="image" id='first-image' onChange={(e) => (values.image.push(e.target.files[0]), changeImage(e, 1))}/>
+                            <input accept='.jpg,.png,.jpeg' className='no--show' type="file" name="image" id='first-image' onChange={(e) => (e.target.files[0] ? values.image.push(e.target.files[0]) : null , changeImage(e, 1))}/>
                             <label className='label--product-image' htmlFor='second-image'>
                                 {secondNewImage ? 
                                     <img className='add--image-product' src={`${secondNewImage}`} alt="second-image" />
@@ -67,7 +93,7 @@ const AddProductBackoffice = () => {
                                     <BiImageAdd className='add--image-icon' />
                                 }
                             </label>
-                            <input className='no--show' type="file" name="image" id='second-image' onChange={(e) => (values.image.push(e.target.files[0]), changeImage(e, 2))}/>
+                            <input accept='.jpg,.png,.jpeg' className='no--show' type="file" name="image" id='second-image' onChange={(e) => (e.target.files[0] ? values.image.push(e.target.files[0]) : null , changeImage(e, 2))}/>
                             <label className='label--product-image' htmlFor='third-image'>
                                 {thirdNewImage ? 
                                     <img className='add--image-product' src={`${thirdNewImage}`} alt="third-image" />
@@ -75,7 +101,7 @@ const AddProductBackoffice = () => {
                                     <BiImageAdd className='add--image-icon' />
                                 }
                             </label>
-                            <input className='no--show' type="file" name="image" id='third-image' onChange={(e) => (values.image.push(e.target.files[0]), changeImage(e, 3))}/>
+                            <input accept='.jpg,.png,.jpeg' className='no--show' type="file" name="image" id='third-image' onChange={(e) => (e.target.files[0] ? values.image.push(e.target.files[0]) : null , changeImage(e, 3))}/>
                         </div>
                         <Field className="add--product-input" name="name" type="text" placeholder="Nombre del producto" />
                         <ErrorMessage name="name" component={() => <p className='input--error-msj'>{errors.name}</p>} />

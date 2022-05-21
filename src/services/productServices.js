@@ -22,6 +22,8 @@ export const getProductByName = async (name) => {
 
 export const saveProduct = async (data, token) => {
     try {
+        console.log(token);
+        console.log(data)
         const response = await axios.post("http://localhost:4000/api/productos", data, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -30,6 +32,7 @@ export const saveProduct = async (data, token) => {
         console.log(response);
         return SweetAlert("Bien!", "Se guardo el producto", "success", "Ok!");
     } catch (error) {
+        console.log("veo error desde service: ", error)
         return SweetAlert("Error!", "No se pudo guardar el producto", "error", "Ok!")
     }
 }
