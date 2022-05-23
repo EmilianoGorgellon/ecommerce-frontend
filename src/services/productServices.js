@@ -22,11 +22,12 @@ export const getProductByName = async (name) => {
 
 export const saveProduct = async (data, token) => {
     try {
-        console.log(token);
+        console.log("veo la data")
         console.log(data)
         const response = await axios.post("http://localhost:4000/api/productos", data, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                'Content-Type':'multipart/form-data'
             }
         })
         console.log(response);
