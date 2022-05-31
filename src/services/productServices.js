@@ -4,6 +4,7 @@ import SweetAlert from "../components/SweetAlert/SweetAlert";
 export const getAllProducts = async () => {
     try {
         const response = await axios.get("http://localhost:4000/api/productos");
+        console.log(response)
         return response.data;  
     } catch (error) {
         return SweetAlert("Error!", "No se pudo obtener los productos", "error", "Ok!");

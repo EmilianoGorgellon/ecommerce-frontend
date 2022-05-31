@@ -12,7 +12,7 @@ const AddProductBackoffice = () => {
     if (token === "") return  window.location.pathname = "/";
     const VALIDATION = {
         name: /^[0-9a-zA-Z\s]{3,}$/,
-        description: /^[0-9a-zA-Z\s]{1,120}$/,
+        description: /^[0-9a-zA-ZÀ-ÿ\u00f1\u00d1\s\.\,]{1,250}$/,
         price: /^[0-9\.\,]{1,}$/,
         category:  /^(vinos|bebida blanca|aperitivos|cervezas)$/,
         stock: /^[0-9]{1,}$/
@@ -33,7 +33,6 @@ const AddProductBackoffice = () => {
     }
   return (
     <main className='container--add-product'>
-        {console.log("renderizo")}
         <section className='add-product'>
             <h1 className='add--product-title'>Agregar un producto</h1>
             <Formik 
@@ -48,6 +47,7 @@ const AddProductBackoffice = () => {
                 
                 validate={(values) => {
                     let errors = {};
+                    console.log(values.description.length);
                     if (!VALIDATION.name.test(values.name)) errors.name = `El nombre del producto solo puede tener letras, numeros y debe ser minimo a 3 caracteres`;
                     if (!VALIDATION.description.test(values.description)) errors.description = `La descripcion del producto no debe contener caracteres especiales y ser mayor a 120 caracteres`;
                     if (!VALIDATION.price.test(values.price)) errors.price = `El precio solo acepta numeros`;
@@ -60,7 +60,7 @@ const AddProductBackoffice = () => {
                     try {
                         filterImageByType(values.images);
                         const form_data = new FormData();
-                        console.log(values.images)
+
                         values.images.map(data => form_data.append('images', data))
                         form_data.append('name', values.name);
                         form_data.append('description', values.description);

@@ -44,7 +44,7 @@ const Destacados = () => {
     const addProductToShoppingCart = (id, image, name, price) => {
         dispatch(addProduct({id, image, name, price}))
     }   
-
+    console.log(dataProducts)
     return (
         <div className='container--destacados'> 
             <h1 className='title--destacados'> Productos destacados</h1> 
@@ -63,7 +63,7 @@ const Destacados = () => {
                         {dataProducts.map((dato,i) => 
                             <SwiperSlide className='container--item'  key={dato.id} >
                                 <Link to={`/product/${dato.name}`} className="item--link">
-                                    <img className='item--image' src={`${dato.image}`} alt={`${dato.name}- ${dato.id}`} />
+                                    <img className='item--image' src={`${dato.imagesUrl}`} alt={`${dato.name}-`} />
                                     <h3 className='item--name'>{`${dato.name}`}</h3>
                                     <p className='item--price'>{`$ ${dato.price},00`}</p>
                                     <button className='item--button' onClick={() => addProductToShoppingCart(dato.id, dato.image, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
