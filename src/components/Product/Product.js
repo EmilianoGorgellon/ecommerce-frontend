@@ -20,8 +20,8 @@ const Product = (props) => {
     }, [])
     let window_width = window.innerWidth;
     
-    const addProductToCart = (id, image, name, price) => {
-        dispatch(addProduct({id, image, name, price}))
+    const addProductToCart = (_id, imagesUrl, name, price) => {
+        dispatch(addProduct({_id, imagesUrl, name, price}))
     }
 
     return (
@@ -31,14 +31,14 @@ const Product = (props) => {
                 <p className='link-history'>PRODUCTO</p>
             </div>
             {data.map(dato =>
-                <section key={dato.id} className='container--product'>
+                <section key={dato._id} className='container--product'>
                     {window_width > 768 ?
                         <div className='product--images-desktop'>
                             <div className='container--images-side'>
-                                {dato.image.map((image, i) => <img onMouseEnter={() => setSelectImage(i)} className={i === selectImage ? 'images-side images-side-active' : 'images-side'} key={i} src={`${image}`} alt={`${dato.name[i]}`} />)}
+                                {dato.imagesUrl.map((image, i) => <img onMouseEnter={() => setSelectImage(i)} className={i === selectImage ? 'images-side images-side-active' : 'images-side'} key={i} src={`${image}`} alt={`${dato.name[i]}`} />)}
                             </div>
                             <div className='container--product-image'>
-                                <img className='product-image' src={`${dato.image[selectImage]}`} alt={`${dato.name}`} />
+                                <img className='product-image' src={`${dato.imagesUrl[selectImage]}`} alt={`${dato.name}`} />
                             </div>
                         </div>
                         :
@@ -52,7 +52,7 @@ const Product = (props) => {
                             navigation={true}
                             modules={[Pagination, Navigation]}
                         >
-                            {dato.image.map((image, i) =>
+                            {dato.imagesUrl.map((image, i) =>
                                 <SwiperSlide key={i} className="container--image">
                                     <img className="image" src={`${image}`} alt={`${i}`} />
                                 </SwiperSlide>
@@ -63,8 +63,8 @@ const Product = (props) => {
                         <h2 className='product--informacion-name'>{dato.name}</h2>
                         <p className='product--informacion-price'>$ {dato.price},00</p>
                         <div className='product-container--buttons'>
-                            <button className='link-payment' onClick={() => addProductToCart(dato.id, dato.image, dato.name, dato.price)}><Link to="/payment" className='link-payment'>Comprar</Link></button>
-                            <button className='product-button' onClick={() => addProductToCart(dato.id, dato.image, dato.name, dato.price)}>Agregar <AiOutlineShoppingCart /></button>
+                            <button className='link-payment' onClick={() => addProductToCart(dato._id, dato.imagesUrl, dato.name, dato.price)}><Link to="/payment" className='link-payment'>Comprar</Link></button>
+                            <button className='product-button' onClick={() => addProductToCart(dato._id, dato.imagesUrl, dato.name, dato.price)}>Agregar <AiOutlineShoppingCart /></button>
                         </div>
                         <p className={dato.stock > 0 ? "product--informacion-stock stock" : "product--informacion-stock no-stock"}>{dato.stock > 0 ? `Stock: ${dato.stock} unidades` : 'No hay stock de este producto'} </p>
                         <p className='product--informacion-description'>{dato.description}</p>

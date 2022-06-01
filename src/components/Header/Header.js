@@ -50,7 +50,8 @@ const Header = (params) => {
                             </div>
                             :
                             decodedToken.name.validateEmail ? 
-                                <div className={userOption ? 'container--user-profile container--user-profile-active'  : 'container--user-profile'} onMouseEnter={() => dispatch(showMenu(true))}>
+                            <div onMouseEnter={() => dispatch(showMenu(true))} onMouseLeave={() => dispatch(showMenu(false))}>
+                                <div className={userOption ? 'container--user-profile container--user-profile-active'  : 'container--user-profile'} >
                                     <div className="user--profile-img">
                                         <img className='profile-img' src={`${decodedToken.name.image}`} alt={`${decodedToken.name.name}-img`} />
                                     </div>
@@ -58,6 +59,8 @@ const Header = (params) => {
                                         {decodedToken.name.email} <br />
                                         {decodedToken.name.name} <br />
                                     </p>
+                                </div>
+                                {userOption ? <UserOption isAdmin={decodedToken.name.isAdmin} /> : null}
                                 </div>
                             : setErrorSwal(true)
                         }
@@ -114,7 +117,6 @@ const Header = (params) => {
                     .then(() => window.location.reload()) : null
             }
             {cart ? <Cart /> : null}
-            {userOption ? <UserOption isAdmin={decodedToken.name.isAdmin} /> : null}
             {renderPage ? <Redirect to={`/search/${searchRef.current.value}`} search={searchRef.current.value} /> : null}
         </>
     )

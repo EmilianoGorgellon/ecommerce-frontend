@@ -7,7 +7,8 @@ export const shoppingCartSlice = createSlice({
     initialState: [],
     reducers: {
         addProduct: (state, action) => {
-            const find_product = initialState.findIndex(data => data.name === action.payload.name);
+            const find_product = initialState.findIndex(data => data._id === action.payload._id);
+            console.log(find_product)
             // Si no existe el producto devuelve -1, si existe devuelve su index en el array
             if (find_product !== -1) {
                 const quantity = initialState[find_product].quantity;
@@ -18,7 +19,7 @@ export const shoppingCartSlice = createSlice({
             return [...initialState];
         },
         deleteProduct: (state, action) => {
-            const find_product = initialState.findIndex(data => data.id === action.payload)
+            const find_product = initialState.findIndex(data => data._id === action.payload)
             const quantity_product = initialState[find_product].quantity;
             if (quantity_product > 1) {
                 initialState.splice(find_product, 1, {...initialState[find_product], quantity: quantity_product - 1});

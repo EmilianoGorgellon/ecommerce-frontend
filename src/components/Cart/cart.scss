@@ -10,7 +10,7 @@
     border: 1px solid var(--background);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
-    z-index: 10000;
+    z-index: 100;
     .cart {
         width: 100%;
         .cart-title {
@@ -28,7 +28,7 @@
             text-align: center;
             .cart--product-image {
                 width: 100%;
-                max-height: 100px;
+                height: 100px;
                 object-fit: contain;
                 margin-top: 10px;
                 margin-bottom: 10px;
@@ -40,9 +40,12 @@
                 }
             }
             .cart--container-text {
+                display: flex;
+                flex-direction: column;
                 width: 100%;
-                position: relative;
-                text-align: center;    
+                // position: relative;
+                justify-content: center;
+                align-items: center;
                 .cart--product-name {
                     text-transform: uppercase;
                     font-weight: 700;
@@ -55,26 +58,22 @@
                     font-weight: 500;
                     margin-bottom: 10px;
                 }
-                
-                .product--delete-icon {
-                    background-color: var(--blue);
-                    font-size: 20px;
-                    padding: 5px;
-                    margin-bottom: 10px;
-                    position: absolute;
-                    right: 10%;
-                    bottom: -10%;
+                .container--cart-product-quantity {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border: 2px solid rgba(88, 87, 87, 0.24);
                     border-radius: 6px;
-                }
-                @media screen and (min-width: 1024px) {
-                    .product--delete-icon {
-                        bottom: -15%;
+                    width: 50%;
+                    .cart--delete-product, .cart--add-product {
+                        width: 33%;
+                        background-color: var(--blue);
+                        border-radius: 3px;
+                        font-size: 24px;
+                        font-weight: 700;
+                        color: var(--paragraph);
+                        cursor: pointer;
                     }
-                }
-            }
-            @media screen and (min-width: 1024px) {
-                .cart--container-text {
-                    text-align: left;
                 }
             }
         }

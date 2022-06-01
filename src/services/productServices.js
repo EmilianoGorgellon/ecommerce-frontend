@@ -4,7 +4,6 @@ import SweetAlert from "../components/SweetAlert/SweetAlert";
 export const getAllProducts = async () => {
     try {
         const response = await axios.get("http://localhost:4000/api/productos");
-        console.log(response)
         return response.data;  
     } catch (error) {
         return SweetAlert("Error!", "No se pudo obtener los productos", "error", "Ok!");
@@ -23,12 +22,9 @@ export const getProductByName = async (name) => {
 
 export const saveProduct = async (data, token) => {
     try {
-        console.log("veo la data")
-        console.log(data)
         const response = await axios.post("http://localhost:4000/api/productos", data, {
             headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type':'multipart/form-data'
+                Authorization: `Bearer ${token}`
             }
         })
         console.log(response);

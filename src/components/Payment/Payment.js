@@ -8,8 +8,8 @@ const Payment = () => {
     const [render, setRender] = useState(false);
     const get_shopping_cart = useSelector(state => state.shoppingCart);
 
-    const deleteProductOfCart = (id) => {
-        dispatch(deleteProduct(id));
+    const deleteProductOfCart = (_id) => {
+        dispatch(deleteProduct(_id));
         render ? setRender(false) : setRender(true);
     }
 
@@ -27,7 +27,7 @@ const Payment = () => {
                             <h3 className='payment--items-name'>{dato.name}</h3>
                             <div>
                                 <p className='payment--items-price'>${dato.price * dato.quantity},00</p>
-                                <p>Cantidad: {dato.quantity} <MdRemoveShoppingCart onClick={() => deleteProductOfCart(dato.id)} className="payment--delete-icon" />   </p>
+                                <p>Cantidad: {dato.quantity} <MdRemoveShoppingCart onClick={() => deleteProductOfCart(dato._id)} className="payment--delete-icon" />   </p>
                             </div>
                         </section>
                     )}

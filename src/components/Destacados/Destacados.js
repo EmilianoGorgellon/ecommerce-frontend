@@ -25,31 +25,30 @@ const Destacados = () => {
         getData()
     }, [])
 
-    const moveToLeft = () => {
-        if ((moveElements / 100) - 4 === 0 || moveElements / 100 === 0){
-            setTimeout(() => setMoveElements(0), 400)
-            return setMoveElements(moveElements + 25);
-        }
-        setMoveElements(moveElements + 100)
-    }
+    // const moveToLeft = () => {
+    //     if ((moveElements / 100) - 4 === 0 || moveElements / 100 === 0){
+    //         setTimeout(() => setMoveElements(0), 400)
+    //         return setMoveElements(moveElements + 25);
+    //     }
+    //     setMoveElements(moveElements + 100)
+    // }
 
-    const moveToRight = () => {
-        if (Math.abs((moveElements / 100)) + 4 === (window.innerWidth > 768 ? dataProducts.length + 1 : dataProducts.length + 2)){
-            setTimeout(() => setMoveElements(-(dataProducts.length * 100 - 400)), 400)
-            return setMoveElements(moveElements - 25);
-        } 
-        setMoveElements(moveElements - 100)
-    }
-
-    const addProductToShoppingCart = (id, image, name, price) => {
-        dispatch(addProduct({id, image, name, price}))
+    // const moveToRight = () => {
+    //     if (Math.abs((moveElements / 100)) + 4 === (window.innerWidth > 768 ? dataProducts.length + 1 : dataProducts.length + 2)){
+    //         setTimeout(() => setMoveElements(-(dataProducts.length * 100 - 400)), 400)
+    //         return setMoveElements(moveElements - 25);
+    //     } 
+    //     setMoveElements(moveElements - 100)
+    // }
+    console.log(window.innerWidth)
+    const addProductToShoppingCart = (_id, imagesUrl, name, price) => {
+        dispatch(addProduct({_id, imagesUrl, name, price}))
     }   
-    console.log(dataProducts)
     return (
         <div className='container--destacados'> 
             <h1 className='title--destacados'> Productos destacados</h1> 
                     <Swiper
-                        slidesPerView={4}
+                        slidesPerView={window.innerWidth > 768 ? 4 : 1}
                         spaceBetween={30}
                         slidesPerGroup={1}
                         loop={true}
@@ -61,12 +60,12 @@ const Destacados = () => {
                         modules={[Pagination, Navigation]}
                     >
                         {dataProducts.map((dato,i) => 
-                            <SwiperSlide className='container--item'  key={dato.id} >
+                            <SwiperSlide className='container--item'  key={`${i}`} >
                                 <Link to={`/product/${dato.name}`} className="item--link">
-                                    <img className='item--image' src={`${dato.imagesUrl}`} alt={`${dato.name}-`} />
+                                    <img className='item--image' src={`${dato.imagesUrl[0]}`} alt={`${dato.name}-`} />
                                     <h3 className='item--name'>{`${dato.name}`}</h3>
                                     <p className='item--price'>{`$ ${dato.price},00`}</p>
-                                    <button className='item--button' onClick={() => addProductToShoppingCart(dato.id, dato.image, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
+                                    <button className='item--button' onClick={() => addProductToShoppingCart(dato._id, dato.imagesUrl, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
                                 </Link>
                             </SwiperSlide>
                         )}
