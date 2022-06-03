@@ -6,6 +6,7 @@
         flex-direction: column;
         width: 100%;
         .container--items {
+            flex-direction: column;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
@@ -14,25 +15,48 @@
             border-bottom: 1px solid var(--background);
             background-color: var(--backgroundBox);
             .payment--items-img {
-                width: 200px;
+                width: 90%;
                 height: 200px;
                 object-fit: contain;
+                margin-bottom: 10px;
+            }
+            @media screen and (min-width: 768px) {
+                .payment--items-img {
+                    width: 250px;
+                }
             }
             .payment--items-name, .payment--items-price {
+                margin-bottom: 10px;
                 font-size: 20px;
                 font-weight: 700;
             }
-            .payment--delete-icon {
-                font-size: 20px;
-                background-color: var(--blue);
-                padding: 5px;
-                border-radius: 3px;
-                color: var(--paragraph);
-                cursor: pointer;
+            .container--payment-items-quantity {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: center;
+                border: 2px solid rgba(88, 87, 87, 0.24);
+                border-radius: 6px;
+                width: 25%;
+                .payment--delete-product, .payment--add-product {
+                    width: 33%;
+                    background-color: var(--blue);
+                    border-radius: 3px;
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: var(--paragraph);
+                    cursor: pointer;
+                }
+            }
+            @media screen and (min-width: 768px) {
+                .container--payment-items-quantity {
+                    width: 10%;
+                }
             }
         }
         @media screen and (min-width: 768px) {
             .container--items {
+                flex-direction: row;
                 width: 80%;
                 margin-left: 10%;
                 margin-right: 10%;

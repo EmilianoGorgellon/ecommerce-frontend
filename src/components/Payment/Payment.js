@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProduct } from '../../features/slices/cart';
-import {MdRemoveShoppingCart} from "react-icons/md";
+import { deleteProduct, addProduct } from '../../features/slices/cart';
 import { Link } from 'react-router-dom';
 const Payment = () => {
     const dispatch = useDispatch();
@@ -13,7 +12,37 @@ const Payment = () => {
         render ? setRender(false) : setRender(true);
     }
 
+    const addProductOfCart = (_id) => {
+        dispatch(addProduct({_id}));
+        render ? setRender(false) : setRender(true)
+    }
+
     return (
+        // <main>
+        //     <table>
+        //         <caption>Productos del carrito de compras</caption>
+        //         <thead>
+        //             <tr>
+        //                 <th>Producto</th>
+        //                 <th>Precio</th>
+        //                 <th>Cantidad</th>
+        //                 <th>Subtotal</th>
+        //             </tr>
+        //         </thead>
+        //         <tbody>
+        //             {get_shopping_cart.map((data, i) => 
+        //                 <tr>
+        //                     <td>
+        //                         <img src={`${data.imagesUrl[0]}`} alt={`${data.name} - img`} />
+
+        //                     </td>
+
+        //                 </tr>
+       
+        //             )}
+        //         </tbody>
+        //     </table>
+        // </main>
         <main className='container--payment'>
             <div className='container--link-history'>
                 <Link className='link-history' to="/">HOME/</Link>
@@ -21,13 +50,15 @@ const Payment = () => {
             </div>
             {get_shopping_cart.length === 0 ? <h2>No hay productos para comprar </h2> : 
                 <div className='container--items-payment'>
-                    {get_shopping_cart.map((dato, i) => 
+                    {get_shopping_cart.map((data, i) => 
                         <section key={i} className='container--items'>
-                            <img className='payment--items-img' src={`${dato.image}`} alt={`${dato.name}`}/>
-                            <h3 className='payment--items-name'>{dato.name}</h3>
-                            <div>
-                                <p className='payment--items-price'>${dato.price * dato.quantity},00</p>
-                                <p>Cantidad: {dato.quantity} <MdRemoveShoppingCart onClick={() => deleteProductOfCart(dato._id)} className="payment--delete-icon" />   </p>
+                            <img className='payment--items-img' src={`${data.imagesUrl[0]}`} alt={`${data.name}`}/>
+                            <h3 className='payment--items-name'>{data.name}</h3>
+                            <p className='payment--items-price'>${data.price * data.quantity},00</p>
+                            <div className="container--payment-items-quantity">
+                                <p className="payment--delete-product" onClick={() => deleteProductOfCart(data._id)} >-</p>
+                                <p>{data.quantity}</p>
+                                <p className="payment--add-product" onClick={() => addProductOfCart(data._id)}>+</p>
                             </div>
                         </section>
                     )}

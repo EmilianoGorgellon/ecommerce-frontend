@@ -35,7 +35,7 @@ const AdministradorBack = () => {
         >
           {({ errors }) => (
             <Form className='container--admin-back-form'>
-              <Field className="admin--back-input" name="email" type="email" placeholder="Ingrese su email" />
+              <Field className="admin--back-input" name="email" type="email" placeholder="Ingrese un email" />
               <ErrorMessage name="email" component={() => <p className='input--error-msj'>{errors.email}</p>} />
               <input className='admin--back-button' type="submit" value="Enviar" />
             </Form>

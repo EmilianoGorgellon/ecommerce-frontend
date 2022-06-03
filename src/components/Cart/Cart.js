@@ -1,6 +1,4 @@
-import React, {useEffect, useState} from "react";
-import "./cart.scss";
-import {MdDataSaverOff, MdRemoveShoppingCart} from "react-icons/md";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, addProduct } from "../../features/slices/cart";
 import { Link } from "react-router-dom";
@@ -14,7 +12,6 @@ const Cart = () => {
     }
 
     const addProductOfCart = (_id) => {
-        console.log(_id)
         dispatch(addProduct({_id}));
         render ? setRender(false) : setRender(true)
     }

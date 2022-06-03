@@ -48,3 +48,16 @@ export const userToAdmin = async (email, token) => {
         return SweetAlert("Error!", "No se pudo actualizar el usuario", "error", "Ok");
     }
 }
+
+export const getUsers = async (token) => {
+    try {
+        return await axios.get("http://localhost:4000/api/user/", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+    } catch (error) {
+        return SweetAlert("Error!", "No se pudo actualizar el usuario", "error", "Ok");
+    }
+    
+}

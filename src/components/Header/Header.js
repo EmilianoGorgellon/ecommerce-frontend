@@ -50,17 +50,16 @@ const Header = (params) => {
                             </div>
                             :
                             decodedToken.name.validateEmail ? 
-                            <div onMouseEnter={() => dispatch(showMenu(true))} onMouseLeave={() => dispatch(showMenu(false))}>
-                                <div className={userOption ? 'container--user-profile container--user-profile-active'  : 'container--user-profile'} >
-                                    <div className="user--profile-img">
-                                        <img className='profile-img' src={`${decodedToken.name.image}`} alt={`${decodedToken.name.name}-img`} />
-                                    </div>
-                                    <p className='user--profile-text'>
-                                        {decodedToken.name.email} <br />
+                                <div onMouseEnter={() => dispatch(showMenu(true))} onMouseLeave={() => dispatch(showMenu(false))}>
+                                    <div className={userOption ? 'container--user-profile container--user-profile-active'  : 'container--user-profile'} >
+                                        <div className="user--profile-img">
+                                            <img className='profile-img' src={`${decodedToken.name.image}`} alt={`${decodedToken.name.name}-img`} />
+                                        </div>
+                                        <p className='user--profile-text'>{decodedToken.name.email} <br />
                                         {decodedToken.name.name} <br />
-                                    </p>
-                                </div>
-                                {userOption ? <UserOption isAdmin={decodedToken.name.isAdmin} /> : null}
+                                        </p>
+                                    </div>
+                                    {userOption ? <UserOption isAdmin={decodedToken.name.isAdmin} /> : null}
                                 </div>
                             : setErrorSwal(true)
                         }
@@ -87,6 +86,7 @@ const Header = (params) => {
                                         {decodedToken.name.name} <br />
                                     </p>
                                     <p onClick={() => (dispatch(deleteTokenFromCookie()), window.location.reload())} className='menu--user-text'>Cerrar sesion</p>
+                                    <Link to="/settings" className='menu--user-text'>Ajustes</Link>
                                 </div>
                             </div>
                         }
@@ -96,9 +96,12 @@ const Header = (params) => {
                         <li className='menu--container-link'><Link className='menu-links' to={`/category/cervezas`} onClick={() => setBarMenu(false)}><FaBeer /> Cervezas</Link></li>
                         <li className='menu--container-link'>
                             {window.innerWidth > 768 ?
-                                <p className='menu-links link-cart' style={{ cursor: "pointer" }} onClick={() => cart ? setCart(false) : setCart(true)}>
-                                    <AiOutlineShoppingCart />
-                                </p>
+                                <div onMouseEnter={() => cart ? setCart(false) : setCart(true)} onMouseLeave={() => cart ? setCart(false) : setCart(false)}>
+                                    <p className='menu-links link-cart'>
+                                        <AiOutlineShoppingCart />
+                                    </p>
+                                    {cart ? <Cart /> : null}
+                                </div>
                                 :
                                 <Link className='menu-links' to="/payment" onClick={() => setBarMenu(false)}><AiOutlineShoppingCart /></Link>
                             }
@@ -116,7 +119,6 @@ const Header = (params) => {
                     .then(() => dispatch(deleteTokenFromCookie()))
                     .then(() => window.location.reload()) : null
             }
-            {cart ? <Cart /> : null}
             {renderPage ? <Redirect to={`/search/${searchRef.current.value}`} search={searchRef.current.value} /> : null}
         </>
     )

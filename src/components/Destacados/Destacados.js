@@ -11,7 +11,6 @@ import "swiper/css/pagination";
 import { Pagination, Navigation } from "swiper";
 const Destacados = () => {
     const [dataProducts, setDataProducts] = useState([]);
-    const [moveElements, setMoveElements] = useState(0);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,24 +23,8 @@ const Destacados = () => {
         }
         getData()
     }, [])
-
-    // const moveToLeft = () => {
-    //     if ((moveElements / 100) - 4 === 0 || moveElements / 100 === 0){
-    //         setTimeout(() => setMoveElements(0), 400)
-    //         return setMoveElements(moveElements + 25);
-    //     }
-    //     setMoveElements(moveElements + 100)
-    // }
-
-    // const moveToRight = () => {
-    //     if (Math.abs((moveElements / 100)) + 4 === (window.innerWidth > 768 ? dataProducts.length + 1 : dataProducts.length + 2)){
-    //         setTimeout(() => setMoveElements(-(dataProducts.length * 100 - 400)), 400)
-    //         return setMoveElements(moveElements - 25);
-    //     } 
-    //     setMoveElements(moveElements - 100)
-    // }
-    console.log(window.innerWidth)
-    const addProductToShoppingCart = (_id, imagesUrl, name, price) => {
+    const addProductToShoppingCart = (_id, imagesUrl, name, price, e) => {
+        e.preventDefault();
         dispatch(addProduct({_id, imagesUrl, name, price}))
     }   
     return (
@@ -65,7 +48,7 @@ const Destacados = () => {
                                     <img className='item--image' src={`${dato.imagesUrl[0]}`} alt={`${dato.name}-`} />
                                     <h3 className='item--name'>{`${dato.name}`}</h3>
                                     <p className='item--price'>{`$ ${dato.price},00`}</p>
-                                    <button className='item--button' onClick={() => addProductToShoppingCart(dato._id, dato.imagesUrl, dato.name, dato.price)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
+                                    <button className='item--button' onClick={(e) => addProductToShoppingCart(dato._id, dato.imagesUrl, dato.name, dato.price, e)}>Agregar <MdOutlineAddShoppingCart className='item--icon-shop'/></button>
                                 </Link>
                             </SwiperSlide>
                         )}
