@@ -10,7 +10,8 @@ const Register = () => {
     const [newImage, setNewImage] = useState("https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_960_720.png")
     const VALIDATION = {
         name: /^[a-zA-Z\s]{3,}$/,
-        email: /^([0-9a-z_\.\+-]+)@(gmail.com)$/,
+        // email: /^([0-9a-z_\.\+-]+)@(gmail.com||hotmail.com)$/,
+        email: /^([0-9a-z_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
         password: /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,16}/
     }
     useEffect(() => {
@@ -51,7 +52,7 @@ const Register = () => {
                         if (!values.password) {
                             errors.password = 'Ingrese una contraseña'
                         } else if (!VALIDATION.password.test(values.password)) {
-                            errors.password = "Este campo debe contener 8 a 16 caracteres y una letra minuscula, una mayuscula, un numero y un digito especial"
+                            errors.password = "Este campo debe contener 8 a 16 caracteres y una letra minuscula, una mayuscula, un numero y un caracter especial"
                         }
                         return errors;
                     }}

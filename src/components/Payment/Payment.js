@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProduct, addProduct } from '../../features/slices/cart';
 import { Link } from 'react-router-dom';
+import { generate_payment_mercadopago } from '../../services/payment_services';
 const Payment = () => {
+    const token = useSelector(state => state.getToken);
     const dispatch = useDispatch();
     const [render, setRender] = useState(false);
     const get_shopping_cart = useSelector(state => state.shoppingCart);
@@ -17,32 +19,12 @@ const Payment = () => {
         render ? setRender(false) : setRender(true)
     }
 
+    const send_product_payment = async (products, token) => {
+        const {response} = await generate_payment_mercadopago(products, token);
+        window.open(response)
+    }
+    
     return (
-        // <main>
-        //     <table>
-        //         <caption>Productos del carrito de compras</caption>
-        //         <thead>
-        //             <tr>
-        //                 <th>Producto</th>
-        //                 <th>Precio</th>
-        //                 <th>Cantidad</th>
-        //                 <th>Subtotal</th>
-        //             </tr>
-        //         </thead>
-        //         <tbody>
-        //             {get_shopping_cart.map((data, i) => 
-        //                 <tr>
-        //                     <td>
-        //                         <img src={`${data.imagesUrl[0]}`} alt={`${data.name} - img`} />
-
-        //                     </td>
-
-        //                 </tr>
-       
-        //             )}
-        //         </tbody>
-        //     </table>
-        // </main>
         <main className='container--payment'>
             <div className='container--link-history'>
                 <Link className='link-history' to="/">HOME/</Link>
@@ -73,8 +55,8 @@ const Payment = () => {
                         </p>
                     </div>
                     <div className='container--payments-buttons'>
-                        <button className='payment-button'>PAGAR CON MERCADO PAGO</button>
                         <button className='payment-button'>PAGAR CON PAYPAL</button>
+                        <button className='payment-button' onClick={() => send_product_payment(get_shopping_cart, token)}>PAGAR CON MERCADO PAGO</button>
                     </div>
                 </div>
             }

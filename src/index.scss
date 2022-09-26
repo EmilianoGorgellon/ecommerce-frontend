@@ -5,12 +5,14 @@
 @import url("./components/Product/product.scss");
 @import url("./components/Destacados/destacados.scss");
 @import url("./components/Login/login.scss");
+@import url("./components/ForgetPassword/recoveryPassword.scss");
 @import url("./components/UserOption/userOption.scss");
 @import url("./components/Register/register.scss");
 @import url("./components/Settings/setting.scss");
 @import url("./components/Cart/cart.scss");
 @import url("./components/Backoffice/AdminBackoffice/AdministradorBack.scss");
 @import url("./components/Backoffice/AddProductBackoffice/AddProductBackoffice.scss");
+@import url("./components/Payment/payment_message.scss");
 :root {
     --blue: #0077F9;
     --bluehover: #0663c7;

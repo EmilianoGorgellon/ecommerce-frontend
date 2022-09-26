@@ -1,11 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Link } from "react-router-dom";
 import { loginUser } from "../../services/usersService";
 import { useDispatch } from 'react-redux';
 import { getTokenFromCookie } from "../../features/slices/token";
 const Login = (params) => {
     const dispatch = useDispatch();
     const VALIDATION = {
-        email: /^([0-9a-z_\.\+-]+)@(gmail.com)$/,
+        email: /^([0-9a-z_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
         password: /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,16}/
     }
 
@@ -13,7 +14,7 @@ const Login = (params) => {
         <main className='container--login'>
             <div className='login'>
                 <h1 className='login-title'>Hola! Ingresa tus datos para iniciar sesion</h1>
-                    <Formik className='login--container-form' initialValues={{
+                    <Formik initialValues={{
                         email: "",
                         password: ""
                     }}
@@ -44,7 +45,7 @@ const Login = (params) => {
                         }}
                     >
                         {({ errors }) => (
-                            <Form encType='multipart/form-data' className='container--inputs'>
+                            <Form>
                                 <div className='container-input'>
                                     <label id="labelemail" className='input-label'>Email <br /></label>
                                     <Field id="labelemail" className="input" name="email" type="email" placeholder="Su nombre" />
@@ -54,6 +55,9 @@ const Login = (params) => {
                                     <label id="labelpassword" className='input-label'>Contraseña <br /></label>
                                     <Field id="labelpassword" className="input" name="password" type="password" placeholder="Su password" />
                                     <ErrorMessage name="password" component={() => <p className='input--error-msj'>{errors.password}</p>} />
+                                </div>
+                                <div className='container-input'>
+                                    <Link to="/forget-password">Has olvidado tu contraseña ?</Link>
                                 </div>
                                 <div className='container--button-submit'>
                                     <button className="button-submit" type="submit">Enviar</button>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { getAllProducts } from '../../services/productServices';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,8 @@ import { useDispatch } from 'react-redux';
 import { setData } from '../../features/slices/filterProducts';
 const Search = (params) => {
     const { searchProducts } = useParams();
-    const dispatch = useDispatch()
-
+    console.log(searchProducts)
+    const dispatch = useDispatch();
     useEffect(() => {
         const getData = async () => {
             try {
