@@ -55,11 +55,13 @@
             .input--error-msj {
                 color: red;
             }
+
         }
         .container--button-submit {
             width: 100%;
             .button-submit {
                 width: 102%;
+                cursor: pointer;
                 font-size: 18px;
                 padding: 10px 0;
                 background-color: var(--blue);

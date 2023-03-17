@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAllProducts } from '../../services/productServices';
+import { getAllProducts } from '../../services/product_services';
 import FilterProducts from '../Products/FilterProducts/FilterProducts';
 import ListProducts from '../Products/ListProducts/ListProducts';
 import { setData } from '../../features/slices/filterProducts';

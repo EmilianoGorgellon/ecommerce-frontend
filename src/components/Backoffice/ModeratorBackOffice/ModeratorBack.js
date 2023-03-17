@@ -1,18 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { userToAdmin } from "../../../services/user_services";
+import { userToModerator } from "../../../services/user_services";
 import SweetAlert from '../../SweetAlert/SweetAlert';
-const AdministradorBack = () => {
+const ModeratorBack = () => {
   const token = useSelector(state => state.getToken);
+  if (token === "") return  window.location.pathname = "/";
   const VALIDATION = {
     email: /^([0-9a-z_\.\+-]+)@(gmail.com)$/,
   }
-  if (token === "") return  window.location.pathname = "/";
   return (
-    <main className='container--admin-back'>
-      <section className='admin--back'>
-        <h1 className='admin--back-title'>Convertir un usuario a administrador</h1>
+    <main className='container--moderator-back'>
+      <section className='moderator--back'>
+        <h1 className='moderator--back-title'>Convertir un usuario a moderador</h1>
         <Formik
           initialValues={{
             "email": ""
@@ -28,17 +28,17 @@ const AdministradorBack = () => {
           }}
           onSubmit = {async (values) => {
             try {
-              await userToAdmin(values, token)
+              await userToModerator(values, token)
             } catch (error) {
               return SweetAlert("Error!", "Error, asegurese de completar todos los campos", "error", "Exit")
             }
           }}
         >
           {({ errors }) => (
-            <Form className='container--admin-back-form'>
-              <Field className="admin--back-input" name="email" type="email" placeholder="Ingrese un email" />
+            <Form className='container--moderator-back-form'>
+              <Field className="moderator--back-input" name="email" type="email" placeholder="Ingrese un email" />
               <ErrorMessage name="email" component={() => <p className='input--error-msj'>{errors.email}</p>} />
-              <input className='admin--back-button' type="submit" value="Enviar" />
+              <input className='moderator--back-button' type="submit" value="Enviar" />
             </Form>
           )}
         </Formik>
@@ -47,4 +47,4 @@ const AdministradorBack = () => {
   )
 }
 
-export default AdministradorBack
+export default ModeratorBack;

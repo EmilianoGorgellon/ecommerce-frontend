@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getProductByName } from "../../services/productServices";
+import { getProductByName } from "../../services/product_services";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../features/slices/cart';
@@ -62,11 +62,11 @@ const Product = (props) => {
                     <div className='container--product-information'>
                         <h2 className='product--informacion-name'>{dato.name}</h2>
                         <p className='product--informacion-price'>$ {dato.price},00</p>
+                        <p className={dato.stock > 0 ? "product--informacion-stock stock" : "product--informacion-stock no-stock"}>{dato.stock > 0 ? `Stock: ${dato.stock} unidades` : 'No hay stock de este producto'} </p>
                         <div className='product-container--buttons'>
                             <button className='link-payment' onClick={() => addProductToCart(dato._id, dato.imagesUrl, dato.name, dato.price)}><Link to="/payment" className='link-payment'>Comprar</Link></button>
                             <button className='product-button' onClick={() => addProductToCart(dato._id, dato.imagesUrl, dato.name, dato.price)}>Agregar <AiOutlineShoppingCart /></button>
                         </div>
-                        <p className={dato.stock > 0 ? "product--informacion-stock stock" : "product--informacion-stock no-stock"}>{dato.stock > 0 ? `Stock: ${dato.stock} unidades` : 'No hay stock de este producto'} </p>
                         <p className='product--informacion-description'>{dato.description}</p>
                     </div>
                 </section>

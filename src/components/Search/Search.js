@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { getAllProducts } from '../../services/productServices';
+import { getAllProducts } from '../../services/product_services';
 import { Link } from 'react-router-dom';
 import FilterProducts from '../Products/FilterProducts/FilterProducts';
 import ListProducts from '../Products/ListProducts/ListProducts';

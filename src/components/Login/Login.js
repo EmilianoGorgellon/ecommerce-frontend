@@ -1,15 +1,20 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Link } from "react-router-dom";
-import { loginUser } from "../../services/usersService";
-import { useDispatch } from 'react-redux';
+import { loginUser } from "../../services/auth_services";
+import { useDispatch, useSelector } from 'react-redux';
 import { getTokenFromCookie } from "../../features/slices/token";
 const Login = (params) => {
     const dispatch = useDispatch();
     const VALIDATION = {
-        email: /^([0-9a-z_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+        email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
         password: /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,16}/
     }
-
+    const token = useSelector(state => state.getToken);
+    dispatch(getTokenFromCookie());
+    if (token !== undefined && token !== "") {
+        params.history.push("/");
+    }
+    
     return (
         <main className='container--login'>
             <div className='login'>
@@ -39,8 +44,7 @@ const Login = (params) => {
                             }
                             const response = await loginUser(DATA);
                             if (typeof (response) === "string") {
-                                params.history.push("/");
-                                dispatch(getTokenFromCookie());
+                                window.location.reload();
                             }
                         }}
                     >

@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { forgetPassword } from "../../services/usersService";
+import { forgetPassword } from "../../services/user_services";
 import RecoveryPassword from './RecoveryPassword';
 import { useState } from 'react';
 const ForgetPassword = () => {

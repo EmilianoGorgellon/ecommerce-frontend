@@ -1,20 +1,20 @@
-.container--admin-back {
+.container--moderator-back {
     display: block;
     padding-top: 30px;
-    .admin--back {
+    .moderator--back {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         width: 100%;
         background-color: var(--backgroundBox);
-        .admin--back-title {
+        .moderator--back-title {
             margin-top: 20px;
             margin-bottom: 20px;
         }
-        .container--admin-back-form {
+        .container--moderator-back-form {
             width: 90%;
-            .admin--back-input {
+            .moderator--back-input {
                 display: block;
                 margin: 0 auto;
                 width: 90%;
@@ -30,7 +30,7 @@
                 width: 90%;
                 color: var(--red);
             }
-            .admin--back-button {
+            .moderator--back-button {
                 display: block;
                 margin: 20px auto;
                 width: 90%;
@@ -43,7 +43,7 @@
                 border-radius: 6px;
             }
             @media screen and (min-width: 768px) {
-                .admin--back-button {
+                .moderator--back-button {
                     transition: transform .4s;
                     &:hover {
                         cursor: pointer;
@@ -54,13 +54,13 @@
         }
     
         @media screen and (min-width: 768px) {
-            .container--admin-back-form {
+            .container--moderator-back-form {
                 width: 100%;
             }
         }
     }
     @media screen and (min-width: 768px) {
-        .admin--back {
+        .moderator--back {
             width: 60%;
             margin-left: 25%;
             margin-right: 25%;

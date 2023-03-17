@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { saveUser } from '../../services/usersService';
+import { saveUser } from '../../services/auth_services';
 import SweetAlert from '../SweetAlert/SweetAlert';
 import { BiCamera } from 'react-icons/bi';
 const Register = () => {
@@ -9,9 +9,8 @@ const Register = () => {
     const [mouseInImage, setMouseInImage] = useState(false);
     const [newImage, setNewImage] = useState("https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_960_720.png")
     const VALIDATION = {
-        name: /^[a-zA-Z\s]{3,}$/,
-        // email: /^([0-9a-z_\.\+-]+)@(gmail.com||hotmail.com)$/,
-        email: /^([0-9a-z_\.\+-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,
+        name: /^[a-zA-Z\s]{3,20}$/,
+        email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
         password: /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,16}/
     }
     useEffect(() => {
@@ -35,6 +34,7 @@ const Register = () => {
                     email: "",
                     password: "",
                     repeatPassword: "",
+                    roles: [],
                     image:"",
                 }}
                     validate={(values) => {
@@ -54,6 +54,9 @@ const Register = () => {
                         } else if (!VALIDATION.password.test(values.password)) {
                             errors.password = "Este campo debe contener 8 a 16 caracteres y una letra minuscula, una mayuscula, un numero y un caracter especial"
                         }
+                        if (values.roles.length === 0) {
+                            errors.roles = 'Debe elegir un rol para su cuenta'
+                        }
                         return errors;
                     }}
                     onSubmit={async (values) => {
@@ -67,6 +70,7 @@ const Register = () => {
                                 formData.append('email', values.email);
                                 formData.append('password', values.password);
                                 formData.append('image', values.image);
+                                formData.append('roles', values.roles);
                                 return await saveUser(formData);
                             }
                             return setFileImageMsj(true);   
@@ -103,6 +107,15 @@ const Register = () => {
                             <div className='container-input'>
                                 <Field name="repeatPassword" className="input" type="password" placeholder="Repita contraseña" />
                                 <p className='input--error-msj'>{repeatPassword}</p>
+                            </div>
+                            <div className='container-input'>
+                                <Field className="input" name="roles" as="select">
+                                    <option>Seleccione un rol</option>
+                                    <option value="user">Usuario</option>
+                                    <option value="moderator">Moderador</option>
+                                </Field>
+                                <p className='input-label'>El rol usuario no le permitira ver las funciones detras del backoffice, mientras que el rol moderador podra verla pero no ejecutarlas</p>
+                                <p className='input--error-msj'>{errors.roles}</p>
                             </div>
                             <div className='container--button-submit'>
                                 <button className='button-submit' type="submit">Enviar</button>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { BiImageAdd } from "react-icons/bi";
 import { useSelector } from 'react-redux';
-import { saveProduct } from "../../../services/productServices"; 
+import { saveProduct } from "../../../services/product_services"; 
 import SweetAlert from '../../SweetAlert/SweetAlert';
 const AddProductBackoffice = () => {
     const [firstNewImage, setFirstNewImage] = useState(false);

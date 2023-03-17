@@ -25,7 +25,6 @@ const ListProducts = (params) => {
                             <p className={dato.stock > 0 ? "stock" : "no-stock"}>{dato.stock !== 0 ? `En stock` : `Sin stock`}</p>
                             <div className='container--buttons-product'>
                                 <button className='link-payment' onClick={(e) => addProductToCart(dato._id, dato.imagesUrl, dato.name, dato.price, e)}><Link to="/payment" className='link-payment'>Comprar</Link></button>
-                                {/* <Link to="/payment" className='link-payment' onClick={(e) => send_product(dato.id, dato.image, dato.name, dato.price, e)}>Comprar</Link> */}
                                 <button className='button-cart' onClick={(e) => addProductToCart(dato._id, dato.imagesUrl, dato.name, dato.price, e)}>Agregar <AiOutlineShoppingCart /></button>
                             </div>
                         </div>

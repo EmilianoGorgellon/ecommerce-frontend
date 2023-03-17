@@ -1,0 +1,31 @@
+.container--page-not-found {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    text-align: center;
+    .page--not-found-img {
+        width: 250px;
+        margin-top: 5%;
+        object-fit:contain;
+    }
+    .container--text {
+        margin: 0 5%;
+        .page--not-found-title {
+            font-size: 3rem;
+        }
+        .page--not-found-subtitle {
+            font-size: 2rem;
+        }
+        .page--not-found-text {
+            font-size: 1rem;
+        }
+    }
+    
+    @media screen and (max-width: 768px) {
+        .page--not-found-title, .page--not-found-subtitle {
+            font-size: 1.5rem;
+        }
+    }
+}

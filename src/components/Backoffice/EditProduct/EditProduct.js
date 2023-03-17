@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getAllProducts } from "../../../services/productServices";
-import PageNotFound from "../../PageNotFound/PageNotFound";
+import { getAllProducts } from "../../../services/product_services";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { BiImageAdd } from "react-icons/bi";
 import SweetAlert from '../../SweetAlert/SweetAlert';
@@ -11,6 +10,7 @@ const EditProduct = () => {
     const [secondNewImage, setSecondNewImage] = useState(false);
     const [thirdNewImage, setThirdNewImage] = useState(false);
     const token = useSelector(state => state.getToken);
+    
     let get_url = window.location.href;
     get_url = get_url.split("/");
     const product_id = get_url[get_url.length - 1].replace(/%20/g," ");

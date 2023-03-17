@@ -13,6 +13,9 @@
 @import url("./components/Backoffice/AdminBackoffice/AdministradorBack.scss");
 @import url("./components/Backoffice/AddProductBackoffice/AddProductBackoffice.scss");
 @import url("./components/Payment/payment_message.scss");
+@import url("./components/Backoffice/ModeratorBackOffice/ModeratorBack.scss");
+@import url("./components/Spinner/spinner.scss");
+@import url("./components/PageNotFound/pageNotFound.scss");
 :root {
     --blue: #0077F9;
     --bluehover: #0663c7;
@@ -27,6 +30,7 @@ body {
     margin: 70px 0 0 0;
     background-color: var(--background);
     font-family: 'Roboto', sans-serif;
+    position: relative;
 }
 @media screen and (min-width: 768px) {
     body {
@@ -34,3 +38,10 @@ body {
     }
 }
 
+.container--app-show {
+    display: block;
+}
+
+.container--app-noshow {
+    display: none;
+}
